@@ -28,7 +28,7 @@ class PaymentsController < BaseController
   def confirm
     redirect_to action: 'index' unless params[:tocken]
 
-    details_response = gatewau.details_for(params[:tocken])
+    details_response = gateway.details_for(params[:tocken])
 
     if !details_response.success?
       @message = details_response.message
