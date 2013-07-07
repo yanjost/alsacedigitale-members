@@ -1,18 +1,6 @@
 class Payment
   include Mongoid::Document
 
-  field :date, type: Date
-  field :amount, type: Float
-  field :mode, type: String
-  field :check_reference, type: String
-  field :transfer_reference, type: String
-
-  validates :mode, inclusion: { in: ["Bank Check", "Cash", "Transfer", "Paypal"] } 
-  validates_with CheckPaymentValidator
-  validates_with TransferPaymentValidator
-
-  belongs_to :user
-
   class CheckPaymentValidator < ActiveModel::Validator
     def validate(record)
       if record.mode == "Bank Check" && (check_reference == nil || check_reference == "")
@@ -28,6 +16,17 @@ class Payment
     end
   end
 
+  field :date, type: Date
+  field :amount, type: Float
+  field :mode, type: String
+  field :check_reference, type: String
+  field :transfer_reference, type: String
+
+  validates :mode, inclusion: { in: ["Bank Check", "Cash", "Transfer", "Paypal"] } 
+  validates_with CheckPaymentValidator
+  validates_with TransferPaymentValidator
+
+  belongs_to :user
   ##Paypal
 
   def self.conf
