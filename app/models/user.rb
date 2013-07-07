@@ -57,9 +57,8 @@ class User
   field :professionnal_phone, type: String
   field :subscription_date, type: Date
   field :last_renewal_date, type: Date
-  field :payment_mode, type: String
 
-  validates :payment_mode, inclusion: { in: ["Bank Check", "Cash", "Transfer"] } 
+  validate_presence_of :first_name, :last_name, :street, :zipcode, :city, :country
 
   def is_admin?
     admin
