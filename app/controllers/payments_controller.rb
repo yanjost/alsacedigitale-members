@@ -24,4 +24,16 @@ class PaymentsController < BaseController
       signature:  ENV['PAYPAL_SIGNATURE']
     )
   end
+
+  def confirm
+    redirect_to action: 'index' unless params[:tocken]
+
+    details_response = gatewau.details_for(params[:tocken])
+
+    if !details_response.success?
+      @message = details_response.message
+      render action: 'error'
+      return 
+  end
+  @address = details_response.address
 end
