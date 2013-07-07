@@ -1,0 +1,31 @@
+%h2 Sign up
+
+= simple_form_for resource, :as => resource_name, :url => registration_path(resource_name) do |f|
+  = f.error_notification
+
+  .row
+    .form-inputs.span6
+      = f.input :first_name, :autofocus => true
+      = f.input :last_name
+      = f.input :email
+      = f.input :password
+      = f.input :password_confirmation, :required => true
+
+    .form-inputs.span6
+      = f.input :street, as: :text
+      = f.input :zipcode
+      = f.input :city
+      = f.input :country
+
+  .row
+    .form-inputs
+      = f.input :birth_date
+      = f.input :birth_place
+      = f.input :job_position, type: String
+      = f.input :personal_phone, type: String
+      = f.input :professional_phone, type: String
+
+    .form-actions
+      = f.button :submit, "Sign up" 
+
+= render "devise/shared/links" 
