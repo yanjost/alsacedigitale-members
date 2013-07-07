@@ -7,7 +7,7 @@ gem 'rails', '4.0.0'
 
 gem 'mongoid', git: 'https://github.com/mongoid/mongoid.git'
 gem 'cancan'
-gem "devise", "~> 3.0.0.rc"
+gem "devise", :git => 'https://github.com/plataformatec/devise.git', :branch => 'rails4'
 gem 'haml'
 gem 'simple_form'
 gem 'bootstrap-sass'
