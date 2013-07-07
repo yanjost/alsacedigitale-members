@@ -60,4 +60,7 @@ class User
 
   has_many :payments
 
+  def to_s
+    "#{first_name} #{last_name}"
+  end
 end
