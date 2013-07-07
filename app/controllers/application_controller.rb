@@ -2,11 +2,6 @@ class ApplicationController < BaseController
   before_action :registration_permitted_parameters, if: :devise_controller?
 
   def index
-    if user_signed_in?
-      if !current_user.is_active?
-        flash[:error] = "validity"
-      end
-    end
   end
 
     def registration_permitted_parameters

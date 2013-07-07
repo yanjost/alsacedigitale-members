@@ -1,0 +1,26 @@
+%h1 Liste des utilisateurs
+
+%table.table
+  %thead
+    %tr
+      %th Prénom
+      %th Nom
+      %th Adresse
+      %th Téléphone
+      %th Dernière cotisation
+      %th Cotisation
+  %tbody
+    - User.all.each do |u|
+      %tr
+        %td=u.first_name
+        %td=u.last_name
+        %td=u.address
+        %td
+          = u.personal_phone 
+          = " / #{u.professional_phone}" if u.professional_phone
+        %td= u.last_renewal_date
+        - if u.is_active?
+          %td.user-active
+        - else
+          %td.user-late
+

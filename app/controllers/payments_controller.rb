@@ -34,6 +34,7 @@ class PaymentsController < BaseController
       @message = details_response.message
       render action: 'error'
       return 
+    end
+    @address = details_response.address
   end
-  @address = details_response.address
 end

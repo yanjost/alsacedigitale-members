@@ -59,20 +59,30 @@ class User
   field :subscription_date, type: Date
   field :last_renewal_date, type: Date
 
-  validates_presence_of :first_name, :last_name, :street, :zipcode, :city, :country, :email, :password
+  field :flex_days, type: Integer, default: 0
+
+  validates_presence_of :first_name, :last_name, :street, :zipcode, :city, :country, :email
 
   has_many :payments
+
+  before_create do |user|
+    user.flex_days = 2
+  end
 
   def is_active?
     if last_renewal_date == nil
       false
     else
-      Date.now - last_renewal_date < 1.year
+      DateTime.now - last_renewal_date < 1.year
     end
   end
 
   def is_admin?
     admin
+  end
+
+  def address
+    "#{street} #{zipcode} #{city} #{country}"
   end
 
   def to_s

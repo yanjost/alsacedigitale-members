@@ -1,4 +1,16 @@
-%h1 Profile utilisateur
+%h1 Profil utilisateur
 
-= gravatar_image_tag(current_user.email, alt: current_user)
+= gravatar_image_tag current_user.email, alt: current_user
+%span.profile-name= current_user
+
+.balance-summary
+  %h3 État de l'abonnement
+  - if !current_user.is_active?
+    = render '/application/flash'
+
+  %ul{class: !current_user.is_active? && "disable-info"}
+    %li
+      Jours en flex :
+      = current_user.flex_days
+    %li Abonnement 
 
