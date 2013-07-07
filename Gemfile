@@ -1,12 +1,16 @@
 source 'https://rubygems.org'
 
+ruby '2.0.0'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
-gem 'mongoid'
+gem 'mongoid', git: 'https://github.com/mongoid/mongoid.git'
 gem 'cancan'
-gem 'devise'
+gem "devise", "~> 3.0.0.rc"
 gem 'haml'
+gem 'simple_form'
+gem 'bootstrap-sass'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -45,3 +49,13 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+#
+
+group :development do
+  gem 'debugger'
+  gem 'pry-rails'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+end
+
+
