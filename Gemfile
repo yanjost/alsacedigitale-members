@@ -11,6 +11,7 @@ gem "devise", "~> 3.0.0.rc"
 gem 'haml'
 gem 'simple_form'
 gem 'bootstrap-sass'
+gem 'activemerchant'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'

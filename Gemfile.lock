@@ -20,6 +20,17 @@ GEM
       erubis (~> 2.7.0)
       rack (~> 1.5.2)
       rack-test (~> 0.6.2)
+    active_utils (1.0.5)
+      activesupport (>= 2.3.11)
+      i18n
+    activemerchant (1.34.1)
+      active_utils (>= 1.0.2)
+      activesupport (>= 2.3.14)
+      builder (>= 2.0.0)
+      i18n
+      json (>= 1.5.1)
+      money
+      nokogiri (< 1.6.0)
     activemodel (4.0.0)
       activesupport (= 4.0.0)
       builder (~> 3.1.0)
@@ -88,8 +99,11 @@ GEM
     method_source (0.8.1)
     mime-types (1.23)
     minitest (4.7.5)
+    money (5.1.1)
+      i18n (~> 0.6.0)
     moped (1.5.0)
     multi_json (1.7.7)
+    nokogiri (1.5.10)
     origin (1.1.0)
     orm_adapter (0.4.0)
     polyglot (0.3.3)
@@ -157,6 +171,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activemerchant
   better_errors
   binding_of_caller
   bootstrap-sass
