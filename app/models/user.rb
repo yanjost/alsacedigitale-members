@@ -1,5 +1,7 @@
 class User
   include Mongoid::Document
+  include Mongoid::Timestamps
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -39,6 +41,7 @@ class User
   # field :authentication_token, :type => String
   #
 
+  field :admin, type: Boolean, default: false
   field :role, type: String, default: "Member"
   field :first_name, type: String
   field :last_name, type: String
@@ -59,6 +62,18 @@ class User
   validates_presence_of :first_name, :last_name, :street, :zipcode, :city, :country, :email, :password
 
   has_many :payments
+
+  def is_active?
+    if last_renewal_date == nil
+      false
+    else
+      Date.now - last_renewal_date < 1.year
+    end
+  end
+
+  def is_admin?
+    admin
+  end
 
   def to_s
     "#{first_name} #{last_name}"

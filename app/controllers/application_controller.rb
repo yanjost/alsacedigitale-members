@@ -1,11 +1,12 @@
-class ApplicationController < ActionController::Base
+class ApplicationController < BaseController
   before_action :registration_permitted_parameters, if: :devise_controller?
 
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :exception
-
   def index
+    if user_signed_in?
+      if !current_user.is_active?
+        flash[:error] = "validity"
+      end
+    end
   end
 
     def registration_permitted_parameters

@@ -1,0 +1,7 @@
+- if error = flash[:error]
+  .alert.alert-error
+    - if error == "validity"
+      Votre compte n'est pas valide ! Êtes-vous à jour de cotisation ?
+      = link_to "Payez maintenant", subscription_payments_path
+    - else
+      = error

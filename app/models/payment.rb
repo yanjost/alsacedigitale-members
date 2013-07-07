@@ -1,5 +1,6 @@
 class Payment
   include Mongoid::Document
+  include Mongoid::Timestamps
 
   class CheckPaymentValidator < ActiveModel::Validator
     def validate(record)

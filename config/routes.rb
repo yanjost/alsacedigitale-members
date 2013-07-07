@@ -1,9 +1,19 @@
 MembersAlsacedigitale::Application.routes.draw do
-  devise_for :users
+  devise_for :users 
+  resources :users, only: [] do
+    collection do 
+      get 'profile'
+    end
+  end
   root to: "application#index"
 
-  resources :payments do
-    get 'thank_you'
+  resources :payments, only: [] do
+    collection do
+      get 'subscription_confirm'
+      get 'subscription'
+      get 'subscription_checkout'
+      get 'thank_you'
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
