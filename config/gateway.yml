@@ -1,0 +1,12 @@
+development: &development
+  mode: test
+  login:
+  password:
+  signature:
+  application_id:
+
+production:
+  <<: *development
+
+test: 
+  <<: *development
