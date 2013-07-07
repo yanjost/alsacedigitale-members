@@ -37,4 +37,31 @@ class User
 
   ## Token authenticatable
   # field :authentication_token, :type => String
+  #
+
+  field :admin, type: Boolean, default: false
+
+  field :role, type: String, default: "Member"
+  field :first_name, type: String
+  field :last_name, type: String
+  field :birth_date, type: Date
+  field :birth_place, type: String
+
+  field :street, type: String
+  field :zipcode, type: Integer
+  field :city, type: String
+  field :country, type: String, default: "France"
+
+  field :job_position, type: String
+  field :personnal_phone, type: String
+  field :professionnal_phone, type: String
+  field :subscription_date, type: Date
+  field :last_renewal_date, type: Date
+  field :payment_mode, type: String
+
+  validates :payment_mode, inclusion: { in: ["Bank Check", "Cash", "Transfer"] } 
+
+  def is_admin?
+    admin
+  end
 end
