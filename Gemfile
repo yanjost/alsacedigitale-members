@@ -13,6 +13,8 @@ gem 'simple_form'
 gem 'bootstrap-sass'
 gem 'activemerchant'
 gem 'country_select'
+gem 'gravatar_image_tag'
+gem 'pry-rails'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
