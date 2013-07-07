@@ -11,6 +11,8 @@ class Payment
   validates_with CheckPaymentValidator
   validates_with TransferPaymentValidator
 
+  belongs_to :user
+
   class CheckPaymentValidator < ActiveModel::Validator
     def validate(record)
       if record.mode == "Bank Check" && (check_reference == nil || check_reference == "")
@@ -26,49 +28,48 @@ class Payment
     end
   end
 
-end
+  ##Paypal
 
-##Paypal
+  def self.conf
+    @@gateway_conf ||= YAML.load_file(Rails.root.join('config/gateway.yml').to_s)[Rails.env]
+  end
 
-def self.conf
-  @@gateway_conf ||= YAML.load_file(Rails.root.join('config/gateway.yml').to_s)[Rails.env]
-end
+  def setup_payement(options)
+    gateway.setup_payement(amount * 100, options)
+  end
 
-def setup_payement(options)
-  gateway.setup_payement(amount * 100, options)
-end
+  def redirect_url(token)
+    gateway.redirect_url(token)
+  end
 
-def redirect_url(token)
-  gateway.redirect_url(token)
-end
-
-def purchase(options={}) 
-    self.status = PROCESSING  
-    #:ip       => request.remote_ip,
-    #:payer_id => params[:payer_id],
-    #:token    => params[:token]
-    response = gateway.purchase(amt, options)      
-    if response.success?       
-      self.transaction_num = response.params['transaction_id']       
-      self.status = SUCCESS     
-    else       
+  def purchase(options={}) 
+      self.status = PROCESSING  
+      #:ip       => request.remote_ip,
+      #:payer_id => params[:payer_id],
+      #:token    => params[:token]
+      response = gateway.purchase(amt, options)      
+      if response.success?       
+        self.transaction_num = response.params['transaction_id']       
+        self.status = SUCCESS     
+      else       
+        self.status = FAILED     
+      end     
+      return self   
+    rescue Exception => e     
       self.status = FAILED     
-    end     
-    return self   
-  rescue Exception => e     
-    self.status = FAILED     
-    return self   
+      return self   
+    end
+
+  private   
+  def gateway 
+    ActiveMerchant::Billing::Base.mode = auth['mode'].to_sym 
+    ActiveMerchant::Billing::PaypalExpressGateway.new(
+      :login => auth['login'], :password => auth['password'],
+      :signature => auth['signature']) 
   end
 
-private   
-def gateway 
-  ActiveMerchant::Billing::Base.mode = auth['mode'].to_sym 
-  ActiveMerchant::Billing::PaypalExpressGateway.new(
-    :login => auth['login'], :password => auth['password'],
-    :signature => auth['signature']) 
+    def auth 
+      self.class.conf 
+    end
+  end   
 end
-
-  def auth 
-    self.class.conf 
-  end
-end   

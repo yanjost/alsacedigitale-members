@@ -51,14 +51,13 @@ class User
   field :country, type: String, default: "France"
 
   field :job_position, type: String
-  field :personnal_phone, type: String
-  field :professionnal_phone, type: String
+  field :personal_phone, type: String
+  field :professional_phone, type: String
   field :subscription_date, type: Date
   field :last_renewal_date, type: Date
 
-  validate_presence_of :first_name, :last_name, :street, :zipcode, :city, :country
+  validates_presence_of :first_name, :last_name, :street, :zipcode, :city, :country, :email, :password
 
-  def is_admin?
-    admin
-  end
+  has_many :payments
+
 end
