@@ -25,7 +25,7 @@ class PaymentsController < BaseController
     )
   end
 
-  def confirm
+  def subscription_confirm
     redirect_to action: 'index' unless params[:tocken]
 
     details_response = gateway.details_for(params[:tocken])
