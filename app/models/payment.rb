@@ -67,8 +67,7 @@ class Payment
       :signature => auth['signature']) 
   end
 
-    def auth 
-      self.class.conf 
-    end
-  end   
+  def auth
+    self.class.conf
+  end
 end

@@ -3,7 +3,7 @@ MembersAlsacedigitale::Application.routes.draw do
   root to: "application#index"
 
   resources :payments do
-    get '/thank_you'   
+    get 'thank_you'
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
