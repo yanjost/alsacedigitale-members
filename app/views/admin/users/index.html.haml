@@ -10,7 +10,7 @@
       %th Dernière cotisation
       %th Cotisation
   %tbody
-    - User.all.each do |u|
+    - @users.each do |u|
       %tr
         %td=u.first_name
         %td=u.last_name
