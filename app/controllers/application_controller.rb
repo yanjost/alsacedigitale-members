@@ -1,6 +1,11 @@
 class ApplicationController < BaseController
   before_action :registration_permitted_parameters, if: :devise_controller?
 
+  # Doesn't work !!!
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, :alert => exception.message
+  end
+
   def index
   end
 
