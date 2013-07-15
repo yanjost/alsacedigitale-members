@@ -1,0 +1,7 @@
+= render 'application/flash'
+
+- if user_signed_in?
+  %a
+    = link_to 'Déconnexion', destroy_user_session_path, :method => :delete
+
+%h1 Alsace Digitale - Gestion des membres

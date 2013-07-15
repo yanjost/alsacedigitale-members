@@ -1,6 +1,4 @@
-= render 'application/flash'
-
-%h1 Alsace Digitale - Gestion des membres
+= render 'shared/top'
 
 - if user_signed_in?
   %h2= "Connecté en tant que #{current_user}"
