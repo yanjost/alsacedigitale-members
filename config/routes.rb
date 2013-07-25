@@ -1,5 +1,6 @@
 MembersAlsacedigitale::Application.routes.draw do
-  devise_for :users 
+  devise_for :users
+
   resources :users, only: [] do
     collection do 
       get 'profile'
@@ -13,7 +14,9 @@ MembersAlsacedigitale::Application.routes.draw do
       get 'subscription'
       get 'subscription_checkout'
       get 'thank_you'
+      get 'mypayments'
     end
+    # get :toto, on: :member
   end
 
   namespace :admin do

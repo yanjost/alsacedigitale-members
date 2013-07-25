@@ -7,6 +7,7 @@ class ApplicationController < BaseController
   end
 
   def index
+    redirect_to :controller => 'users', :action => 'profile'
   end
 
     def registration_permitted_parameters

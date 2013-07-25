@@ -24,6 +24,10 @@ MembersAlsacedigitale::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+  ENV['PAYPAL_LOGIN'] = 'paypal.sandbox_api1.alsacedigitale.org'
+  ENV['PAYPAL_PASSWORD'] = '1373200713'
+  ENV['PAYPAL_SIGNATURE'] = 'ABefT67F.te41BmL9KK9l82ovttpAW3zio6cfDms.fKzXPyUvpNlpwQa'
+
   config.after_initialize do
     ActiveMerchant::Billing::Base.mode = :test
   end
